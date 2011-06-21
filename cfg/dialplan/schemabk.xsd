@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="stringtype">
+ <xs:restriction base="xs:string"/>
+</xs:simpleType>
+
+<xs:simpleType name="booleantype">
+ <xs:restriction base="xs:string">
+  <xs:pattern value="true|false"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="breaktype">
+ <xs:restriction base="xs:string">
+  <xs:pattern value="on-true|on-false|always|never"/>
+ </xs:restriction
+</xs:simpleType>
+
+<xs:complexType name="actiontype">
+ <xs:attribute name="inline" type="booleantype"/>
+ <xs:attribute name="application" type="stringtype" use="required"/>
+ <xs:attribute name="data" type="stringtype"/>
+</xs:complexType>
+
+<xs:complexType name="conditiontype">
+ <xs:sequence>
+  <xs:element name="action" type="actiontype" maxOccurs="unbounded" minOccurs="0"/>
+  <xs:element name="anti-action" type="actiontype" maxOccurs="unbounded" minOccurs="0"/>
+ </xs:sequence>
+ <xs:attribute name="field" type="stringtype"/>
+ <xs:attribute name="expression" type="stringtype"/>
+ <xs:attribute name="break" type="breaktype"/>
+ <xs:attribute name="year" type="stringtype"/>
+ <xs:attribute name="yday" type="stringtype"/>
+ <xs:attribute name="mon" type="stringtype"/>
+ <xs:attribute name="mday" type="stringtype"/>
+ <xs:attribute name="week" type="stringtype"/>
+ <xs:attribute name="wday" type="stringtype"/>
+ <xs:attribute name="hour" type="stringtype"/>
+ <xs:attribute name="minute" type="stringtype"/>
+ <xs:attribute name="minute-of-day" type="stringtype"/>
+</xs:complexType>
+
+<xs:complexType name="extentiontype">
+ <xs:sequence>
+  <xs:element name="condition" type="conditiontype" maxOccurs="unbounded" minOccurs="0"/>
+ </xs:sequence>
+ <xs:attribute name="name" type="stringtype" use="required"/>
+ <xs:attribute name="continue" type="booleantype"/>
+</xs:complexType>
+
+<xs:complexType name="contexttype">
+ <xs:sequence>
+  <xs:element name="extention" type="extentiontype" maxOccurs="unbounded" minOccurs="0"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:element name="context" type="contexttype" maxOccurs="1" minOccurs="1"/>
+</xs:schema>

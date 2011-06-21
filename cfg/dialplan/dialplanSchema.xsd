@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="context" maxOccurs="1" minOccurs="1">
+ <xs:complexType>
+  <xs:sequence>
+   <xs:element name="extension" maxOccurs="unbounded" minOccurs="1">
+    <xs:complexType>
+      <xs:sequence>
+       <xs:element name="condition" maxOccurs="unbounded" minOccurs="1">
+        <xs:complexType>
+         <xs:sequence>
+          <xs:element name="action" maxOccurs="unbounded" minOccurs="0">
+           <xs:complexType>
+            <xs:attribute name="application" type="xs:string" use="required"/>
+            <xs:attribute name="data" type="xs:string"/>
+           </xs:complexType>
+          </xs:element>
+	  <xs:element name="anti-action" maxOccurs="unbounded" minOccurs="0">
+           <xs:complexType>
+	    <xs:attribute name="application" type="xs:string" use="required"/>
+            <xs:attribute name="data" type="xs:string"/>
+           </xs:complexType>
+          </xs:element>
+         </xs:sequence>
+        <xs:attribute name="field" type="xs:string" use="required"/>
+        <xs:attribute name="expression" type="xs:string" use="required"/>
+        </xs:complexType>
+       </xs:element>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+   </xs:element>
+  </xs:sequence>
+ </xs:complexType>
+</xs:element>
+</xs:schema>
